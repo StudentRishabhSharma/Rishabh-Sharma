@@ -1,0 +1,1525 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[Your Name] — UI/UX & Product Designer</title>
+    <meta
+      name="description"
+      content="[Your Name] — a UI/UX and product designer creating interfaces that feel considered, fast, and human."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #f7f5f2;
+        --bg-alt: #efece6;
+        --fg: #15141a;
+        --fg-dim: #6b6a72;
+        --line: #dedad2;
+        --accent: #6a4fe0;
+        --accent-dim: #8f7bd6;
+        --edge: 6vw;
+        --transition-theme:
+          background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+      }
+      html[data-theme="dark"] {
+        --bg: #0d0d10;
+        --bg-alt: #151519;
+        --fg: #f4f3f0;
+        --fg-dim: #9a9aa3;
+        --line: #232329;
+        --accent: #b9a6ff;
+        --accent-dim: #8577b8;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body,
+      header,
+      .marquee-wrap,
+      .hero-portrait,
+      .work-media,
+      .clock-badge,
+      .about-skills span,
+      .service-row,
+      .faq-item,
+      .contact-email,
+      .theme-toggle,
+      .nav-cta {
+        transition: var(--transition-theme);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "Inter", sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        list-style: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      button {
+        font-family: inherit;
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .wrap {
+        max-width: 1360px;
+        margin: 0 auto;
+        padding-left: var(--edge);
+        padding-right: var(--edge);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        letter-spacing: -0.02em;
+        line-height: 0.98;
+      }
+      em {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--fg-dim);
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      /* reveal-on-scroll */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px) scale(0.98);
+        filter: blur(6px);
+        transition:
+          opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+      .reveal-left {
+        opacity: 0;
+        transform: translateX(-36px);
+        transition:
+          opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal-left.in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .reveal-right {
+        opacity: 0;
+        transform: translateX(36px);
+        transition:
+          opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal-right.in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* stagger children within a group once the group is revealed */
+      .stagger > * {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .stagger.in > * {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .stagger > *:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .stagger > *:nth-child(2) {
+        transition-delay: 0.12s;
+      }
+      .stagger > *:nth-child(3) {
+        transition-delay: 0.19s;
+      }
+      .stagger > *:nth-child(4) {
+        transition-delay: 0.26s;
+      }
+      .stagger > *:nth-child(5) {
+        transition-delay: 0.33s;
+      }
+      .stagger > *:nth-child(6) {
+        transition-delay: 0.4s;
+      }
+      .stagger > *:nth-child(7) {
+        transition-delay: 0.47s;
+      }
+      .stagger > *:nth-child(8) {
+        transition-delay: 0.54s;
+      }
+
+      /* scroll progress bar */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        background: var(--accent);
+        width: 0%;
+        z-index: 200;
+        transition: width 0.1s linear;
+      }
+
+      /* ---------- NAV ---------- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.6rem 0;
+        mix-blend-mode: normal;
+      }
+      nav.wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.4rem;
+        font-size: 0.88rem;
+        color: var(--fg-dim);
+      }
+      .nav-links a {
+        transition: color 0.2s ease;
+      }
+      .nav-links a:hover {
+        color: var(--fg);
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.4rem;
+      }
+      .clock-badge {
+        font-size: 0.75rem;
+        color: var(--fg-dim);
+        border: 1px solid var(--line);
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .clock-badge .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #6ce29a;
+        flex-shrink: 0;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+      }
+      .nav-cta {
+        font-size: 0.85rem;
+        padding: 0.55rem 1.2rem;
+        background: var(--accent);
+        color: #ffffff;
+        border-radius: 30px;
+        font-weight: 500;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+      .nav-cta:hover {
+        transform: translateY(-2px);
+        background: #cabdff;
+      }
+      .nav-toggle {
+        display: none;
+      }
+
+      .theme-toggle {
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--fg);
+        position: relative;
+        flex-shrink: 0;
+      }
+      .theme-toggle svg {
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        transition:
+          opacity 0.25s ease,
+          transform 0.35s ease;
+      }
+      .theme-toggle .icon-sun {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+      .theme-toggle .icon-moon {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.5);
+      }
+      html[data-theme="dark"] .theme-toggle .icon-sun {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.5);
+      }
+      html[data-theme="dark"] .theme-toggle .icon-moon {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+
+      @media (max-width: 900px) {
+        .nav-links {
+          display: none;
+        }
+        .clock-badge {
+          display: none;
+        }
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 9rem;
+        padding-bottom: 3rem;
+        position: relative;
+      }
+      .hero-top {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 2rem;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .hero h1 .line {
+        display: block;
+        overflow: hidden;
+      }
+      .hero-sub {
+        margin-top: 2rem;
+        font-size: 1.05rem;
+        color: var(--fg-dim);
+        max-width: 36ch;
+      }
+      .hero-portrait {
+        aspect-ratio: 3/4;
+        background-image: url("portrait.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-portrait::before {
+        content: "";
+      }
+      /*.hero-portrait{
+    aspect-ratio:3/4;
+    background:linear-gradient(160deg,#1c1c22,#0d0d10 70%);
+    border:1px solid var(--line);
+    border-radius:14px;
+    position:relative;
+    overflow:hidden;
+  }
+  /*.hero-portrait::before{
+    content:"[ photo ]";
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--fg-dim);font-size:0.8rem;letter-spacing:0.08em;
+  }
+  .hero-portrait::after{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 18px, rgba(185,166,255,0.06) 18px 19px);
+  }*/
+      .hero-tag {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        background: rgba(13, 13, 16, 0.7);
+        backdrop-filter: blur(6px);
+        border: 1px solid var(--line);
+        padding: 0.5rem 0.85rem;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        color: var(--fg-dim);
+      }
+      .hero-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 3.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--line);
+      }
+      .hero-socials {
+        display: flex;
+        gap: 1.4rem;
+        align-items: center;
+      }
+      .hero-socials a {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--fg-dim);
+        transition:
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.2s ease,
+          border-color 0.2s ease,
+          background 0.2s ease;
+      }
+      .hero-socials a svg {
+        width: 18px;
+        height: 18px;
+      }
+      .hero-socials a:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+        transform: translateY(-4px) rotate(-6deg);
+        background: var(--bg-alt);
+      }
+      .scroll-cue {
+        font-size: 0.72rem;
+        color: var(--fg-dim);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .scroll-cue .arrow {
+        animation: bob 1.6s ease-in-out infinite;
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(6px);
+        }
+      }
+
+      @media (max-width: 820px) {
+        .hero-top {
+          grid-template-columns: 1fr;
+        }
+        .hero-portrait {
+          aspect-ratio: 16/10;
+          order: -1;
+        }
+        .hero-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1.5rem;
+        }
+      }
+
+      /* ---------- MARQUEE ---------- */
+      .marquee-wrap {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 1.6rem 0;
+        overflow: hidden;
+        background: var(--bg-alt);
+      }
+      .marquee-track {
+        display: flex;
+        gap: 3.5rem;
+        width: max-content;
+        animation: scroll-left 26s linear infinite;
+      }
+      .marquee-track span {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 1.3rem;
+        color: var(--fg-dim);
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 3.5rem;
+      }
+      .marquee-track span em {
+        font-size: 1.3rem;
+      }
+      .marquee-track .sep {
+        color: var(--accent);
+      }
+      @keyframes scroll-left {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ---------- SECTION ---------- */
+      .section {
+        padding: 8rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+      .section-head h2 {
+        font-size: clamp(2rem, 4.2vw, 3.4rem);
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .section-head p {
+        color: var(--fg-dim);
+        max-width: 32ch;
+        font-size: 0.95rem;
+      }
+      @media (max-width: 720px) {
+        .section-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      /* ---------- WORK ---------- */
+      .work-item {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 3rem;
+        align-items: center;
+        padding: 3.5rem 0;
+        border-top: 1px solid var(--line);
+      }
+      .work-item:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+      .work-item:nth-child(even) {
+        grid-template-columns: 1.3fr 1fr;
+      }
+      .work-item:nth-child(even) .work-media {
+        order: 2;
+      }
+      .work-media {
+        aspect-ratio: 4/3;
+        background: linear-gradient(150deg, #1a1a20, #0d0d10);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .work-item:hover .work-media {
+        transform: scale(1.02);
+      }
+      .work-media::before {
+        content: "[ project visual ]";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--fg-dim);
+        font-size: 0.75rem;
+      }
+      .work-info .idx {
+        font-size: 0.8rem;
+        color: var(--accent);
+        font-family: "Bricolage Grotesque", sans-serif;
+      }
+      .work-info h3 {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        font-weight: 500;
+        text-transform: none;
+        margin: 0.8rem 0 1rem;
+      }
+      .work-info p {
+        color: var(--fg-dim);
+        max-width: 42ch;
+        font-size: 0.95rem;
+        margin-bottom: 1.6rem;
+      }
+      .work-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.6rem;
+      }
+      .work-tags span {
+        font-size: 0.7rem;
+        color: var(--fg-dim);
+        border: 1px solid var(--line);
+        padding: 0.3rem 0.7rem;
+        border-radius: 20px;
+      }
+      .work-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--fg);
+        border-bottom: 1px solid var(--accent);
+        padding-bottom: 2px;
+      }
+      .work-link svg {
+        width: 13px;
+        height: 13px;
+        transition: transform 0.25s ease;
+      }
+      .work-item:hover .work-link svg {
+        transform: translate(3px, -3px);
+      }
+
+      @media (max-width: 860px) {
+        .work-item,
+        .work-item:nth-child(even) {
+          grid-template-columns: 1fr;
+        }
+        .work-item:nth-child(even) .work-media {
+          order: 0;
+        }
+      }
+
+      /* ---------- ABOUT ---------- */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+      }
+      .about-lede {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        font-weight: 500;
+        line-height: 1.25;
+        text-transform: none;
+      }
+      .about-body {
+        color: var(--fg-dim);
+        margin-top: 1.6rem;
+        max-width: 48ch;
+        font-size: 0.98rem;
+      }
+      .about-body + .about-body {
+        margin-top: 1rem;
+      }
+      .about-skills {
+        margin-top: 2.6rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      .about-skills span {
+        font-size: 0.78rem;
+        padding: 0.5rem 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        color: var(--fg-dim);
+      }
+      .about-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+      }
+      .about-stat {
+        border-top: 1px solid var(--line);
+        padding-top: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .about-stat .num {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 2.4rem;
+        font-weight: 600;
+      }
+      .about-stat .label {
+        font-size: 0.78rem;
+        color: var(--fg-dim);
+        max-width: 20ch;
+        text-align: right;
+      }
+      @media (max-width: 820px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------- SERVICES ---------- */
+      .service-row {
+        display: grid;
+        grid-template-columns: 60px 1fr 1.4fr;
+        gap: 2rem;
+        padding: 2.2rem 0;
+        border-top: 1px solid var(--line);
+        align-items: baseline;
+      }
+      .service-row:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+      .service-row:nth-of-type(1) {
+        transition-delay: 0s;
+      }
+      .service-row:nth-of-type(2) {
+        transition-delay: 0.08s;
+      }
+      .service-row:nth-of-type(3) {
+        transition-delay: 0.16s;
+      }
+      .service-row:nth-of-type(4) {
+        transition-delay: 0.24s;
+      }
+      .service-row .num {
+        font-family: "Bricolage Grotesque", sans-serif;
+        color: var(--accent);
+        font-size: 0.85rem;
+      }
+      .service-row h3 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: none;
+      }
+      .service-row p {
+        color: var(--fg-dim);
+        font-size: 0.92rem;
+        max-width: 46ch;
+      }
+      @media (max-width: 720px) {
+        .service-row {
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+        }
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq-item {
+        border-top: 1px solid var(--line);
+      }
+      .faq-item:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+      .faq-item:nth-of-type(1) {
+        transition-delay: 0s;
+      }
+      .faq-item:nth-of-type(2) {
+        transition-delay: 0.08s;
+      }
+      .faq-item:nth-of-type(3) {
+        transition-delay: 0.16s;
+      }
+      .faq-item:nth-of-type(4) {
+        transition-delay: 0.24s;
+      }
+      .faq-item:nth-of-type(5) {
+        transition-delay: 0.32s;
+      }
+      .faq-q {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        padding: 1.7rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        cursor: pointer;
+        color: var(--fg);
+      }
+      .faq-q h3 {
+        font-size: 1.05rem;
+        font-weight: 400;
+        font-family: "Inter", sans-serif;
+        text-transform: none;
+      }
+      .faq-q .plus {
+        color: var(--accent);
+        font-size: 1.2rem;
+        transition: transform 0.25s ease;
+        flex-shrink: 0;
+      }
+      .faq-item.open .plus {
+        transform: rotate(45deg);
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .faq-a p {
+        color: var(--fg-dim);
+        padding-bottom: 1.7rem;
+        max-width: 60ch;
+        font-size: 0.94rem;
+      }
+
+      /* ---------- CONTACT ---------- */
+      .contact {
+        border-bottom: none;
+        text-align: center;
+        padding-top: 6rem;
+      }
+      .contact .eyebrow {
+        justify-content: center;
+        margin-bottom: 1.6rem;
+      }
+      .contact h2 {
+        font-size: clamp(2.6rem, 7vw, 6rem);
+        font-weight: 600;
+        text-transform: uppercase;
+        max-width: 16ch;
+        margin: 0 auto;
+      }
+      .contact-email {
+        display: inline-block;
+        margin-top: 2.2rem;
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+        color: var(--accent);
+        border-bottom: 1px solid var(--accent-dim);
+        padding-bottom: 4px;
+      }
+      .contact-ctas {
+        margin-top: 2.6rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .contact-ctas a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.85rem 1.6rem;
+        border-radius: 30px;
+        font-size: 0.92rem;
+        border: 1px solid var(--line);
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+      .contact-ctas a svg {
+        width: 16px;
+        height: 16px;
+      }
+      .contact-ctas a.primary {
+        background: var(--accent);
+        color: #0d0d10;
+        border-color: var(--accent);
+      }
+      .contact-ctas a.primary:hover {
+        transform: translateY(-2px);
+        background: #cabdff;
+      }
+      .contact-ctas a.whatsapp:hover {
+        transform: translateY(-2px);
+        border-color: #25d366;
+        color: #25d366;
+      }
+      .contact-socials {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        font-size: 0.85rem;
+        color: var(--fg-dim);
+      }
+      .contact-socials a {
+        transition: color 0.2s ease;
+      }
+      .contact-socials a:hover {
+        color: var(--fg);
+      }
+
+      /* ---------- FOOTER ---------- */
+      footer {
+        padding: 2.4rem var(--edge);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.75rem;
+        color: var(--fg-dim);
+      }
+      @media (max-width: 600px) {
+        footer {
+          flex-direction: column;
+          gap: 0.6rem;
+          text-align: center;
+        }
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: #0d0d10;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header>
+      <nav class="wrap">
+        <a href="#top" class="logo">Rishabh Sharma</a>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="nav-right">
+          <div class="clock-badge">
+            <span class="dot"></span><span id="clock">--:--</span> ·
+            <span id="daylabel">—</span>
+          </div>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle light and dark theme"
+          >
+            <svg
+              class="icon-sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+            <svg
+              class="icon-moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+              />
+            </svg>
+          </button>
+          <a href="#contact" class="nav-cta">Let's talk</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="wrap">
+          <div class="hero-top">
+            <div>
+              <p class="eyebrow reveal in">
+                UI/UX &amp; Product Design — Based in Delhi
+              </p>
+              <h1 style="margin-top: 1.2rem">
+                <span class="line">Between curiosity</span>
+                <span class="line">and <em>creation</em></span>
+              </h1>
+              <p class="hero-sub reveal in">
+                I'm Rishabh Sharma — a product and UI/UX designer turning early
+                ideas into clean, considered digital experiences across web and
+                mobile.
+              </p>
+            </div>
+            <div class="hero-portrait reveal in">
+              <span class="hero-tag">available for work</span>
+            </div>
+          </div>
+
+          <div class="hero-bottom">
+            <div class="hero-socials">
+              <a href="#" aria-label="Behance" target="_blank" rel="noopener">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M0 7h7.5c3.5 0 5 1.5 5 3.8 0 1.7-.9 2.7-2 3.2 1.5.5 2.6 1.7 2.6 3.6 0 2.6-2 4.1-5.5 4.1H0V7zm3 6.6h4c1.5 0 2.5-.7 2.5-2s-1-1.9-2.5-1.9H3v3.9zm0 6.1h4.3c1.7 0 2.8-.8 2.8-2.2 0-1.4-1-2.2-2.8-2.2H3v4.4zM22.5 9.3h-6v-1.7h6v1.7zM24 17.2c-.2-2.9-1.9-5.3-5.2-5.3-3.2 0-5.4 2.3-5.4 5.7 0 3.4 2.2 5.6 5.5 5.6 2.5 0 4.2-1.3 4.9-3.3h-2.6c-.4.8-1.1 1.3-2.3 1.3-1.6 0-2.6-1-2.7-2.6h7.7c0-.5.1-.9.1-1.4zm-7.8-1.2c.2-1.4 1.1-2.3 2.5-2.3s2.3.9 2.4 2.3h-4.9z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.5h4.5V23H.24V8.5zM8.5 8.5h4.32v1.98h.06c.6-1.13 2.07-2.32 4.26-2.32 4.56 0 5.4 3 5.4 6.9V23h-4.5v-6.98c0-1.66-.03-3.8-2.32-3.8-2.32 0-2.68 1.81-2.68 3.68V23H8.5V8.5z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4.2" />
+                  <circle
+                    cx="17.4"
+                    cy="6.6"
+                    r="1.1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="scroll-cue">Scroll <span class="arrow">↓</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MARQUEE -->
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          <span
+            >UI Design <span class="sep">/</span> UX Research
+            <span class="sep">/</span> <em>Design Systems</em>
+            <span class="sep">/</span> Prototyping
+            <span class="sep">/</span> Framer Dev
+            <span class="sep">/</span> Branding <span class="sep">/</span></span
+          >
+          <span
+            >UI Design <span class="sep">/</span> UX Research
+            <span class="sep">/</span> <em>Design Systems</em>
+            <span class="sep">/</span> Prototyping
+            <span class="sep">/</span> Framer Dev
+            <span class="sep">/</span> Branding <span class="sep">/</span></span
+          >
+        </div>
+      </div>
+
+      <!-- WORK -->
+      <section class="section" id="work">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2>Selected Work</h2>
+            <p>
+              A few recent projects — from early flows to shipped, polished
+              product.
+            </p>
+          </div>
+
+          <div class="work-item reveal-left">
+            <div class="work-media"></div>
+            <div class="work-info">
+              <span class="idx">01 / Product Design</span>
+              <h3>Fruggo</h3>
+              <p>
+                A farm-to-consumer marketplace connecting buyers directly with
+                nearby fruit gardens — mobile app + responsive website.
+              </p>
+              <div class="work-tags">
+                <span>UI/UX</span><span>Marketplace</span
+                ><span>Design System</span>
+              </div>
+              <a class="work-link" href="case-study-fruggo.html"
+                >View case study
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M7 17L17 7M17 7H8M17 7V16" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="work-item reveal-right">
+            <div class="work-media"></div>
+            <div class="work-info">
+              <span class="idx">02 / Web Design</span>
+              <h3>Project Name Two</h3>
+              <p>
+                What the project was, who it was for, and the core problem the
+                design solved — kept short and specific.
+              </p>
+              <div class="work-tags">
+                <span>Web Design</span><span>Framer Build</span>
+              </div>
+              <a class="work-link" href="#"
+                >View case study
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M7 17L17 7M17 7H8M17 7V16" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="work-item reveal-left">
+            <div class="work-media"></div>
+            <div class="work-info">
+              <span class="idx">03 / Branding</span>
+              <h3>Project Name Three</h3>
+              <p>
+                What the project was, who it was for, and the core problem the
+                design solved — kept short and specific.
+              </p>
+              <div class="work-tags">
+                <span>Identity</span><span>Web Design</span>
+              </div>
+              <a class="work-link" href="#"
+                >View case study
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M7 17L17 7M17 7H8M17 7V16" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="work-item reveal-right">
+            <div class="work-media"></div>
+            <div class="work-info">
+              <span class="idx">04 / Product Design</span>
+              <h3>Project Name Four</h3>
+              <p>
+                What the project was, who it was for, and the core problem the
+                design solved — kept short and specific.
+              </p>
+              <div class="work-tags">
+                <span>SaaS</span><span>Dashboard</span>
+              </div>
+              <a class="work-link" href="#"
+                >View case study
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M7 17L17 7M17 7H8M17 7V16" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="section" id="about">
+        <div class="wrap">
+          <div class="about-grid">
+            <div>
+              <p class="eyebrow reveal">A little about me</p>
+              <p class="about-lede reveal" style="margin-top: 1.4rem">
+                I believe good design should feel <em>invisible</em> — quiet
+                enough to trust, clear enough to use without thinking twice.
+              </p>
+              <p class="about-body reveal">
+                I'm [Your Name], an independent UI/UX and product designer with
+                [X] years of experience across startups, agencies, and local
+                businesses. I focus on turning early, messy ideas into
+                interfaces that feel simple and considered.
+              </p>
+              <p class="about-body reveal">
+                My process pairs structure with craft — research and flows
+                first, then the visual and motion detail that makes a product
+                feel finished and alive.
+              </p>
+              <div class="about-skills reveal stagger">
+                <span>Figma</span><span>Framer</span><span>UI Design</span
+                ><span>UX Research</span><span>Prototyping</span
+                ><span>Design Systems</span>
+              </div>
+            </div>
+            <div class="about-stack reveal">
+              <div class="about-stat">
+                <span class="num">20+</span
+                ><span class="label"
+                  >Projects shipped across web &amp; mobile</span
+                >
+              </div>
+              <div class="about-stat">
+                <span class="num">4+</span
+                ><span class="label"
+                  >Years of professional design experience</span
+                >
+              </div>
+              <div class="about-stat">
+                <span class="num">6</span
+                ><span class="label"
+                  >Industries — healthcare, SaaS, hospitality &amp; more</span
+                >
+              </div>
+              <div class="about-stat">
+                <span class="num">100%</span
+                ><span class="label">Responsive, accessible builds</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section class="section" id="services">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2>What I Do</h2>
+            <p>From first sketch to shipped, responsive product.</p>
+          </div>
+          <div>
+            <div class="service-row reveal">
+              <span class="num">01</span>
+              <h3>UI/UX Design</h3>
+              <p>
+                Clear flows and interfaces, grounded in research, that help
+                people get things done without friction.
+              </p>
+            </div>
+            <div class="service-row reveal">
+              <span class="num">02</span>
+              <h3>Web Design &amp; Framer Build</h3>
+              <p>
+                Custom, no-template websites — designed, animated, and shipped
+                end to end.
+              </p>
+            </div>
+            <div class="service-row reveal">
+              <span class="num">03</span>
+              <h3>Design Systems</h3>
+              <p>
+                Reusable components and guidelines that keep a product
+                consistent as it scales.
+              </p>
+            </div>
+            <div class="service-row reveal">
+              <span class="num">04</span>
+              <h3>Branding &amp; Identity</h3>
+              <p>
+                Logo, type, and visual language that gives a product or studio a
+                distinct point of view.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2>FAQ</h2>
+            <p>The things people usually ask before we start.</p>
+          </div>
+          <div>
+            <div class="faq-item reveal">
+              <button class="faq-q">
+                <h3>What kind of projects do you take on?</h3>
+                <span class="plus">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Websites and product interfaces for startups, freelancers, and
+                  small teams — anywhere clear structure and considered visuals
+                  matter.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item reveal">
+              <button class="faq-q">
+                <h3>Do you also build, or just design?</h3>
+                <span class="plus">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Both — I design in Figma and can ship the final site myself in
+                  Framer, so nothing gets lost in handoff.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item reveal">
+              <button class="faq-q">
+                <h3>What's your process like?</h3>
+                <span class="plus">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Discovery and structure first, then wireframes, visual design,
+                  and a responsive build — with check-ins at every stage.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item reveal">
+              <button class="faq-q">
+                <h3>How long does a project take?</h3>
+                <span class="plus">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Most single-page sites take two to three weeks; larger
+                  products usually run four to six weeks depending on scope.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item reveal">
+              <button class="faq-q">
+                <h3>How do we get started?</h3>
+                <span class="plus">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Send a short note about your project through the contact
+                  section — I typically reply within a couple of days.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section contact" id="contact">
+        <div class="wrap">
+          <p class="eyebrow reveal">Get in touch</p>
+          <h2 class="reveal" style="margin-top: 1.4rem">
+            Let's create something worth using.
+          </h2>
+          <a href="mailto:you@example.com" class="contact-email reveal"
+            >you@example.com</a
+          >
+
+          <div class="contact-ctas reveal">
+            <a href="mailto:you@example.com" class="primary">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M4 4h16v16H4z" opacity="0" />
+                <path d="M22 6l-10 7L2 6" />
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+              </svg>
+              Email me
+            </a>
+            <a
+              href="https://wa.me/910000000000"
+              target="_blank"
+              rel="noopener"
+              class="whatsapp"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.1a8.2 8.2 0 01-4.18-1.15l-.3-.18-3.12.82.84-3.04-.2-.31a8.16 8.16 0 01-1.25-4.33c0-4.52 3.68-8.2 8.21-8.2 2.19 0 4.25.86 5.8 2.4a8.14 8.14 0 012.4 5.8c0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.17 1.73 2.64 4.2 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28z"
+                />
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+
+          <div class="contact-socials reveal">
+            <a href="#">LinkedIn</a>
+            <a href="#">Dribbble</a>
+            <a href="#">Behance</a>
+            <a href="#">Instagram</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 [Your Name]. All rights reserved.</span>
+      <span>Designed in [Your City]</span>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const revealEls = document.querySelectorAll(
+        ".reveal, .reveal-left, .reveal-right, .stagger",
+      );
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      revealEls.forEach((el) => io.observe(el));
+
+      // Scroll progress bar
+      const progressBar = document.getElementById("scrollProgress");
+      function updateProgress() {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop;
+        const max = h.scrollHeight - h.clientHeight;
+        progressBar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + "%";
+      }
+      document.addEventListener("scroll", updateProgress, { passive: true });
+      updateProgress();
+
+      // Subtle parallax on hero portrait
+      const heroPortrait = document.querySelector(".hero-portrait");
+      function updateParallax() {
+        if (!heroPortrait) return;
+        const y = window.scrollY;
+        if (y < window.innerHeight) {
+          heroPortrait.style.transform = `translateY(${y * 0.08}px)`;
+        }
+      }
+      document.addEventListener("scroll", updateParallax, { passive: true });
+
+      // FAQ accordion
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        const q = item.querySelector(".faq-q"),
+          a = item.querySelector(".faq-a");
+        q.addEventListener("click", () => {
+          const isOpen = item.classList.contains("open");
+          document.querySelectorAll(".faq-item.open").forEach((o) => {
+            o.classList.remove("open");
+            o.querySelector(".faq-a").style.maxHeight = null;
+          });
+          if (!isOpen) {
+            item.classList.add("open");
+            a.style.maxHeight = a.scrollHeight + "px";
+          }
+        });
+      });
+
+      // Theme toggle (persisted) — light is the default
+      const rootEl = document.documentElement;
+      const themeBtn = document.getElementById("themeToggle");
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        rootEl.setAttribute("data-theme", "dark");
+      }
+      themeBtn.addEventListener("click", () => {
+        const isDark = rootEl.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          rootEl.removeAttribute("data-theme");
+          localStorage.setItem("theme", "light");
+        } else {
+          rootEl.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+        }
+      });
+
+      // Live clock badge
+      function tick() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, "0");
+        const m = String(now.getMinutes()).padStart(2, "0");
+        document.getElementById("clock").textContent = `${h}:${m}`;
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        document.getElementById("daylabel").textContent =
+          `${days[now.getDay()]} ${now.getDate()}/${now.getMonth() + 1}`;
+      }
+      tick();
+      setInterval(tick, 15000);
+    </script>
+  </body>
+</html>
