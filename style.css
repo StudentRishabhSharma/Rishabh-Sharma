@@ -596,9 +596,14 @@
           grid-template-columns: 1fr;
         }
         .hero-portrait {
-          aspect-ratio: 10/10;
+          aspect-ratio: 6/8;
           order: -1;
+          margin-top: 0;
         }
+         .hero-tag {
+        bottom: 3rem;
+        left: 13rem;
+      }
         .hero-bottom {
           flex-direction: column;
           align-items: flex-start;
