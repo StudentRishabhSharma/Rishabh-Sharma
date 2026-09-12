@@ -463,15 +463,18 @@
         font-size: 1.05rem;
         color: var(--fg-dim);
         max-width: 36ch;
-      }
+      } 
       .hero-portrait {
         aspect-ratio: 3/4;
-        background-image: url("Portrait.png");
+        background-image: url("herosecimgg.png");
         background-size: cover;
         background-position: center;
+        background-size: 92%;
         background-repeat: no-repeat;
         position: relative;
         overflow: hidden;
+        margin-top: 30px;
+        animation: float 5s ease-in-out infinite;
       }
 
       .hero-portrait::before {
@@ -499,8 +502,8 @@
   }*/
       .hero-tag {
         position: absolute;
-        bottom: 1rem;
-        left: 1rem;
+        bottom: 4rem;
+        left: 19rem;
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(30px) saturate(180%);
         -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -514,7 +517,7 @@
         padding: 0.5rem 0.85rem;
 
         font-size: 0.72rem;
-        color: var(--fg-dim);
+        color: rgb(231, 220, 220);
       }
       .hero-bottom {
         display: flex;
@@ -575,7 +578,19 @@
           transform: translateY(6px);
         }
       }
+      @keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
 
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
       @media (max-width: 820px) {
         .hero-top {
           grid-template-columns: 1fr;
@@ -673,10 +688,64 @@
       .work-item:nth-child(even) {
         grid-template-columns: 1.3fr 1fr;
       }
-      .work-item:nth-child(even) .work-media {
+      .work-item:nth-child(even) .work-media1 {
         order: 2;
       }
-      .work-media {
+        .work-item:nth-child(even) .work-media3 {
+        order: 2;
+      }
+      
+      .work-media1 {
+        background-image: url("hsfruggo.png");
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+        aspect-ratio: 4/3;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .work-item:hover .work-media1 {
+        transform: scale(1.02);
+      }
+      .work-media1::before {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--fg-dim);
+        font-size: 0.75rem;
+      }
+      .work-media2 {
+        background-image: url("hms1.jpg");
+        background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+        aspect-ratio: 4/3;
+        /* background: linear-gradient(150deg, #1a1a20, #0d0d10); */
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .work-item:hover .work-media2 {
+        transform: scale(1.02);
+      }
+      .work-media2::before {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--fg-dim);
+        font-size: 0.75rem;
+      }
+      
+      .work-media3 {
         aspect-ratio: 4/3;
         background: linear-gradient(150deg, #1a1a20, #0d0d10);
         border: 1px solid var(--line);
@@ -685,11 +754,34 @@
         position: relative;
         transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .work-item:hover .work-media {
+      .work-item:hover .work-media3 {
         transform: scale(1.02);
       }
-      .work-media::before {
-        content: "[ project visual ]";
+      .work-media3::before {
+        background-image: url("Portrait.png");
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--fg-dim);
+        font-size: 0.75rem;
+      }
+      
+      .work-media4 {
+        aspect-ratio: 4/3;
+        background: linear-gradient(150deg, #1a1a20, #0d0d10);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .work-item:hover .work-media4 {
+        transform: scale(1.02);
+      }
+      .work-media4::before {
+        background-image: url("Portrait.png");
         position: absolute;
         inset: 0;
         display: flex;
