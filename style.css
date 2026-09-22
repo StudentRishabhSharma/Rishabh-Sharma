@@ -783,7 +783,7 @@ background-position: center;
       
       .work-media3 {
         aspect-ratio: 4/3;
-        background-image: url("crpr.png");
+        background-image: url("Shishyakulam.jpg");
     background-size: cover;
 background-repeat: no-repeat;
 background-position: center;
@@ -810,7 +810,10 @@ background-position: center;
       
       .work-media4 {
         aspect-ratio: 4/3;
-        background: linear-gradient(150deg, #1a1a20, #0d0d10);
+        background-image: url("crpr.png");
+    background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
         border: 1px solid var(--line);
         border-radius: 12px;
         overflow: hidden;
@@ -821,7 +824,7 @@ background-position: center;
         transform: scale(1.02);
       }
       .work-media4::before {
-        background-image: url("Portrait.png");
+        
         position: absolute;
         inset: 0;
         display: flex;
@@ -1114,12 +1117,13 @@ background-position: center;
       }
       .contact-ctas a.primary {
         background: var(--accent);
-        color: #0d0d10;
+        color: #ffffff;
         border-color: var(--accent);
       }
       .contact-ctas a.primary:hover {
         transform: translateY(-2px);
         background: #cabdff;
+        border: none;
       }
       .contact-ctas a.whatsapp:hover {
         transform: translateY(-2px);
