@@ -774,6 +774,14 @@ html[data-theme="dark"] .hero-socials a {
       .work-item:nth-child(even) {
         grid-template-columns: 1.3fr 1fr;
       }
+      .work-item:nth-child(even) .work-info {
+  order: 1;
+}
+
+.work-item:nth-child(even) .work-media2,
+.work-item:nth-child(even) .work-media4 {
+  order: 2;
+}
       .work-item:nth-child(even) .work-media1 {
         order: 2;
       }
@@ -930,16 +938,37 @@ background-position: center;
       .work-item:hover .work-link svg {
         transform: translate(3px, -3px);
       }
-
+      
       @media (max-width: 860px) {
-        .work-item,
-        .work-item:nth-child(even) {
-          grid-template-columns: 1fr;
-        }
-        .work-item:nth-child(even) .work-media {
-          order: 0;
-        }
-      }
+
+  .work-item,
+  .work-item:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  /* Always show image first */
+  .work-media1,
+  .work-media2,
+  .work-media3,
+  .work-media4 {
+    order: 1 !important;
+  }
+
+  /* Text always below image */
+  .work-info {
+    order: 2 !important;
+  }
+
+  .work-info h3 {
+    font-size: 2rem;
+  }
+
+  .work-info p {
+    max-width: 100%;
+  }
+
+}
 
       /* ---------- ABOUT ---------- */
       .about-grid {
