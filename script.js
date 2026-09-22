@@ -88,6 +88,13 @@
       if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
+const navToggle = document.getElementById("navToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+navToggle.addEventListener("click", () => {
+  navToggle.classList.toggle("active");
+  mobileMenu.classList.toggle("active");
+});
 
 window.addEventListener("load", () => {
   window.scrollTo(0, 0);
